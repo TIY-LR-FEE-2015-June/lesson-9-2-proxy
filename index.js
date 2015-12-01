@@ -8,6 +8,9 @@ var app = express();
  */
 app.use(cors());
 
+var id = process.env.GITHUB_ID;
+var secret = process.env.GITHUB_SECRET;
+
 /**
  * Setups route to respond to GET requests for any URI
  */
@@ -21,7 +24,7 @@ app.get('/*', function (req, res) {
    * Makes a request to the proxied API, adds an apiKey query param
    * pipes all traffic back as the HTTP response
    */
-  request('http://addb.absolutdrinks.com/' + path + '?apiKey=23311a636eb84606a031b1292272666b').pipe(res);
+  request('https://api.github.com/' + path + '?client_id=' + id + '&client_secret=' + secret).pipe(res);
 });
 
 /**
